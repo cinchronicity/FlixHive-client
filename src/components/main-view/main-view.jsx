@@ -51,7 +51,7 @@ export const MainView = () => {
       const similarMovies = getSimilarMovies(selectedMovie.genre);
       return (
         <div>
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;
+      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
         <hr />
             <h3>Similar Movies</h3>
       

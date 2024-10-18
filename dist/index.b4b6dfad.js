@@ -27428,7 +27428,6 @@ const MainView = ()=>{
                     lineNumber: 54,
                     columnNumber: 7
                 }, undefined),
-                ";",
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 55,

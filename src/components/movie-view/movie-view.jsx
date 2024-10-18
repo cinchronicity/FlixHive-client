@@ -5,7 +5,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         <h1>{movie.title}</h1>
       </div>
       <div className="movie-description">
-        <p><strong>Description</strong>{movie.description}</p>
+        <p><strong>Description: </strong>{movie.description}</p>
       </div>
       <div className="movie-genre">
         <p><strong>Genre:</strong> {movie.genre.name}</p>

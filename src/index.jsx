@@ -11,7 +11,7 @@ const FlixHiveApplication = () => {
   );
 };
 
-// Finds the root of your app
+// Finds the root of your app (the div with the id "root")
 const container = document.querySelector("#root");
 const root = createRoot(container);
 

@@ -28669,7 +28669,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"bdclA","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3lzHY","react":"21dqq"}],"4OGiN":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bdclA","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3lzHY"}],"4OGiN":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$73d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -28814,6 +28814,6 @@ $RefreshReg$(_c, "SignupView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"bdclA","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3lzHY","react":"21dqq"}]},["8qyFR","lINIu","d8Dch"], "d8Dch", "parcelRequire1fe7")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bdclA","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3lzHY"}]},["8qyFR","lINIu","d8Dch"], "d8Dch", "parcelRequire1fe7")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

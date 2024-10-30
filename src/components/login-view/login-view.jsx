@@ -9,8 +9,8 @@ export const LoginView = ({onLoggedIn}) => { //onLoggedIn is a prop that will be
     event.preventDefault();
 
     const data = {
-      Username: username, 
-      Password: password 
+      username: username, 
+      password: password 
     }
     fetch ('https://flixhive-cf7fbbd939d2.herokuapp.com/login', {
       method: 'POST',

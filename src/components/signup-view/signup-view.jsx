@@ -10,13 +10,13 @@ export const SignupView = () => {
     event.preventDefault();
 
     const data = {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday
     };
-    //replace qith the actual URL of the API endpoint
-    fetch("SIGNUP_URL", {
+    
+    fetch("https://flixhive-cf7fbbd939d2.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

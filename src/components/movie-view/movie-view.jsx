@@ -24,19 +24,18 @@ export const MovieView = ({ movie, onBackClick }) => {
       </div>
       <div className="movie-rating">
         <p>
-          <strong>Rating:</strong> {movie.rating.$numberDouble}
+          <strong>Rating:</strong> {movie.rating}
         </p>
+      </div>
+      <div className="featured">
+        <strong> Featured: </strong> {movie.featured ? "Yes" : "No"}
       </div>
       <div className="movie-image">
         <img src={movie.imageURL} alt={movie.title} />
       </div>
-     
+
       <div className="movie-buttons">
-        <button
-          onClick={onBackClick}
-          className="back-button"
-          style={{ cursor: "pointer" }} //double curly braces indicate that the value is a JavaScript object
-        >
+        <button onClick={onBackClick} className="back-button">
           Back
         </button>
       </div>

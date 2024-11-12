@@ -25,7 +25,7 @@ export const MainView = () => {
       return;
     }
     fetch("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}`},
     })
       .then((response) => response.json())
       .then((movies) => {

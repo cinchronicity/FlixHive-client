@@ -13200,14 +13200,12 @@ textarea.form-control-lg {
   padding: 4px 12px;
 }
 
-.movie-card-container {
-  border: 1px solid red;
-  overflow: hidden;
+img {
+  max-width: 100%;
 }
 
-.movie-card-container img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+.movie-card-container {
+  border: 1px solid gray;
+  overflow: hidden;
 }
 /*# sourceMappingURL=index.2212206d.css.map */

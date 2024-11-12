@@ -6,7 +6,7 @@ import { LoginView } from "../login-view/login-view.jsx";
 import { SignupView } from "../signup-view/signup-view.jsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import '../movie-card/movie-card.css';
+import "../movie-card/movie-card.scss";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -25,12 +25,10 @@ export const MainView = () => {
       return;
     }
     fetch("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
-      headers: { Authorization: "Bearer ${token}" },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((movies) => {
-        setMovies(movies);
-
         const moviesFromApi = movies.map((doc) => {
           return {
             id: doc._id,
@@ -83,7 +81,7 @@ export const MainView = () => {
         movie.genre.name === genre.name && movie.id !== selectedMovie.id
     );
   };
-// selected movie view with similar movies
+  // selected movie view with similar movies
   if (selectedMovie) {
     const similarMovies = getSimilarMovies(selectedMovie.genre);
     return (
@@ -99,49 +97,59 @@ export const MainView = () => {
             Logout
           </button>
         </>
-        
+
         <Row className="justify-content-md-center">
-        <Col md={8} style={{ border: "1px solid black" }}>
+          <Col md={8} style={{ border: "1px solid black" }}>
             <MovieView
               movie={selectedMovie}
               onBackClick={() => setSelectedMovie(null)}
             />
           </Col>
-        </Row> 
+        </Row>
         <h3>Similar Movies</h3>
         <Row className="similar-movies">
-            {similarMovies.map((movie) => (
+          {similarMovies.map((movie) => (
             <Col key={movie.id} xs={12} sm={6} md={4} lg={3}>
-                <MovieCard
-                  key={movie.id}
-                  movie={movie}
-                  onMovieClick={(newSelectedMovie) =>
-                    setSelectedMovie(newSelectedMovie)
-                  }
-                />
-              </Col>
-            ))}
-        
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onMovieClick={(newSelectedMovie) =>
+                  setSelectedMovie(newSelectedMovie)
+                }
+              />
+            </Col>
+          ))}
         </Row>
       </>
     );
   }
 
-  if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
-//main movie list view
-  return ( 
+  if (movies.length === 0)
+    return <div className="main-view">The list is empty!</div>;
+  //main movie list view
+  return (
     <>
-      <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
       <Row>
         {movies.map((movie) => (
-          <Col className= "mb-5" key={movie.id} xs={12} sm={6} md={4} lg={3}>
+          <Col className="mb-5" key={movie.id} xs={12} sm={6} md={4} lg={3}>
             <MovieCard
               movie={movie}
-              onMovieClick={(newSelectedMovie) => setSelectedMovie(newSelectedMovie)}
+              onMovieClick={(newSelectedMovie) =>
+                setSelectedMovie(newSelectedMovie)
+              }
             />
           </Col>
         ))}
       </Row>
+      <button
+        onClick={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
+      >
+        Logout
+      </button>
     </>
   );
 };

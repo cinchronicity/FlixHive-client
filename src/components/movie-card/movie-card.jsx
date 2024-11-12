@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
-import './movie-card.css';
+import "./movie-card.scss";
 
 //add onAddToFavorites prop to MovieCard component later
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
-
-    <Card className= "movie-card-container" onClick={() => onMovieClick(movie)}>
+    <Card
+      className="h-100 movie-card-container"
+      onClick={() => onMovieClick(movie)}
+    >
       <Card.Img variant="top" src={movie.imageURL} />
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>

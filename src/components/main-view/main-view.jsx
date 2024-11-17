@@ -1,155 +1,130 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MovieView } from "../movie-view/movie-view.jsx";
 import { MovieCard } from "../movie-card/movie-card.jsx";
-import { useState, useEffect } from "react";
 import { LoginView } from "../login-view/login-view.jsx";
 import { SignupView } from "../signup-view/signup-view.jsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../movie-card/movie-card.scss";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
-
-  const [selectedMovie, setSelectedMovie] = useState(null);
-
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-
   const [user, setUser] = useState(storedUser ? storedUser : null);
-
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
   useEffect(() => {
-    if (!token) {
-      return;
-    }
+    if (!token) return;
     fetch("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((movies) => {
-        const moviesFromApi = movies.map((doc) => {
-          return {
-            id: doc._id,
-            title: doc.title,
-            description: doc.description,
-            genre: {
-              name: doc.genre.name,
-              description: doc.genre.description,
-            },
-            director: {
-              name: doc.director.name,
-              bio: doc.director.bio,
-              birthYear: doc.director.birthYear,
-              deathYear: doc.director.deathYear,
-            },
-            imageURL: doc.imageURL,
-            rating: doc.rating,
-            featured: doc.featured,
-            actors: doc.actors,
-          };
-        });
+        const moviesFromApi = movies.map((doc) => ({
+          id: doc._id,
+          title: doc.title,
+          description: doc.description,
+          genre: doc.genre,
+          director: doc.director,
+          imageURL: doc.imageURL,
+          rating: doc.rating,
+          featured: doc.featured,
+          actors: doc.actors,
+        }));
         setMovies(moviesFromApi);
       })
-      .catch((error) => {
-        console.error("Error fetching movies:", error);
-      });
-  }, [token]); //second argument to useEffect tells React when to run the effect
+      .catch((error) => console.error("Error fetching movies:", error));
+  }, [token]);
 
-  if (!user) {
-    return (
-      <Row className="justify-content-md-center">
-        <Col md={5}>
-          <LoginView
-            onLoggedIn={(user, token) => {
-              setUser(user);
-              setToken(token);
-            }}
-          />
-          or
-          <SignupView />
-        </Col>
-      </Row>
-    );
-  }
+  
+  const handleLogout = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+  };
 
-  //get similar movies based on genre, excluding the movie that is currently being viewed
-  const getSimilarMovies = (genre) => {
+  const getSimilarMovies = (movieId) => {
+    const currentMovie = movies.find((movie) => movie.id === movieId);
+    if (!currentMovie) return [];
+    // Filter movies by genre and exclude the current movie
     return movies.filter(
       (movie) =>
-        movie.genre.name === genre.name && movie.id !== selectedMovie.id
+        movie.genre.name === currentMovie.genre.name && movie.id !== movieId
     );
   };
-  // selected movie view with similar movies
-  if (selectedMovie) {
-    const similarMovies = getSimilarMovies(selectedMovie.genre);
-    return (
-      <>
-        <>
-          <button
-            onClick={() => {
-              setUser(null);
-              setToken(null);
-              localStorage.clear();
-            }}
-          >
-            Logout
-          </button>
-        </>
 
-        <Row className="justify-content-md-center">
-          <Col md={8} style={{ border: "1px solid black" }}>
-            <MovieView
-              movie={selectedMovie}
-              onBackClick={() => setSelectedMovie(null)}
-            />
-          </Col>
-        </Row>
-        <h3>Similar Movies</h3>
-        <Row className="similar-movies">
-          {similarMovies.map((movie) => (
-            <Col key={movie.id} xs={12} sm={6} md={4} lg={3}>
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                onMovieClick={(newSelectedMovie) =>
-                  setSelectedMovie(newSelectedMovie)
-                }
-              />
-            </Col>
-          ))}
-        </Row>
-      </>
-    );
-  }
-
-  if (movies.length === 0)
-    return <div className="main-view">The list is empty!</div>;
-  //main movie list view
   return (
-    <>
-      <Row>
-        {movies.map((movie) => (
-          <Col className="mb-5" key={movie.id} xs={12} sm={6} md={4} lg={3}>
-            <MovieCard
-              movie={movie}
-              onMovieClick={(newSelectedMovie) =>
-                setSelectedMovie(newSelectedMovie)
+    <BrowserRouter>
+      <Routes>
+        {!user ? (
+          <>
+            <Route
+              path="/login"
+              element={
+                <Row className="justify-content-md-center">
+                  <Col md={5}>
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
+                  </Col>
+                </Row>
               }
             />
-          </Col>
-        ))}
-      </Row>
-      <button
-        onClick={() => {
-          setUser(null);
-          setToken(null);
-          localStorage.clear();
-        }}
-      >
-        Logout
-      </button>
-    </>
+            <Route path="/signup" element={<SignupView />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </>
+        ) : (
+          <>
+            <Route
+              path="/movies"
+              element={
+                <>
+                  <Row>
+                    {movies.map((movie) => (
+                      <Col
+                        className="mb-5"
+                        key={movie.id}
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        lg={3}
+                      >
+                        <MovieCard movie={movie} />
+                      </Col>
+                    ))}
+                  </Row>
+                  <button onClick={handleLogout}>Logout</button>
+                </>
+              }
+            />
+
+            <Route
+              path="/movies/:movieId"
+              element={
+                movies.length === 0 ? (
+                  <div>Loading...</div>
+                ) : (
+                  <MovieView
+                    movies={movies} // pass movies array as prop
+                    getSimilarMovies={getSimilarMovies} // pass getSimilarMovies function as prop
+                  />
+                )
+              }
+            />
+            <Route path="*" element={<Navigate to="/movies" />} />
+          </>
+        )}
+      </Routes>
+    </BrowserRouter>
   );
 };

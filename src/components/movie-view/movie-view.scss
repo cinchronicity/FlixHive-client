@@ -4,10 +4,28 @@
   background-color: dodgerblue;
   border: none;
   border-radius: 4px;
-  
+  margin-top: 10px;
+  margin-right: 10px;
 }
-
 img {
   max-width: 100%;
  
+}
+
+.back-button:hover {
+  background-color: rgb(27, 120, 213);
+  color: white;
+
+
+}
+
+.favorite-button {
+  padding: 4px 12px 4px 12px;
+  color: whitesmoke;
+  background-color: dodgerblue;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }

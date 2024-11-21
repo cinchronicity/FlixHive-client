@@ -3,15 +3,12 @@ import { MovieView } from "../movie-view/movie-view.jsx";
 import { MovieCard } from "../movie-card/movie-card.jsx";
 import { LoginView } from "../login-view/login-view.jsx";
 import { SignupView } from "../signup-view/signup-view.jsx";
+import { NavigationBar } from "../navigation-bar/navigation-bar.jsx";
+import { ProfileView } from "../profile-view/profile-view.jsx";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../movie-card/movie-card.scss";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -43,7 +40,6 @@ export const MainView = () => {
       .catch((error) => console.error("Error fetching movies:", error));
   }, [token]);
 
-  
   const handleLogout = () => {
     setUser(null);
     setToken(null);
@@ -59,9 +55,13 @@ export const MainView = () => {
         movie.genre.name === currentMovie.genre.name && movie.id !== movieId
     );
   };
+  const handleUserUpdate = (updatedUser) => {
+    setUser(updatedUser); // Assuming setUser is updating the user state in the parent component
+  };
 
   return (
     <BrowserRouter>
+      <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Routes>
         {!user ? (
           <>
@@ -117,8 +117,25 @@ export const MainView = () => {
                   <MovieView
                     movies={movies} // pass movies array as prop
                     getSimilarMovies={getSimilarMovies} // pass getSimilarMovies function as prop
+                    user={user} //TODO
+                    setUser={setUser} //TODO
+                    token={token} //TODO
                   />
                 )
+              }
+            />
+
+            <Route
+              path="/profile"
+              element={
+                <ProfileView
+                  user={user}
+                  movies={movies}
+                  token={token}
+                  setUser={setUser}
+                  onUserUpdate={handleUserUpdate} // Make sure this function is passed
+                  // onUserDeregister={handleUserDeregister}
+                />
               }
             />
             <Route path="*" element={<Navigate to="/movies" />} />
@@ -128,3 +145,4 @@ export const MainView = () => {
     </BrowserRouter>
   );
 };
+//removie token={token} setUser={setUser} on profileView if not needed

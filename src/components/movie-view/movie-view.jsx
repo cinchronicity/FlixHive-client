@@ -29,12 +29,11 @@ export const MovieView = ({
         }
       )
       .then((response) => {
-        console.log("Successfully added to favorites:", response.data);
         setUser(response.data);
         localStorage.setItem("user", JSON.stringify(response.data));
       })
       .catch((error) => {
-        console.log("Error adding movie to favorites", error);
+        console.error("Error adding movie to favorites", error);
       });
   };
 
@@ -47,23 +46,13 @@ export const MovieView = ({
         }
       )
       .then((response) => {
-        console.log("Successfully removed from favorites:", response.data);
         setUser(response.data);
         localStorage.setItem("user", JSON.stringify(response.data));
       })
       .catch((error) => {
-        console.log("Error removing movie from favorites", error);
+        console.error("Error removing movie from favorites", error);
       });
   };
-
-  // GET request to get user data from API
-  axios
-    .get(`https://flixhive-cf7fbbd939d2.herokuapp.com/users/${user.username}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-      console.log("User API response:", response.data);
-    });
 
   // Scroll to top when navigating to a new movie view
   useEffect(() => {

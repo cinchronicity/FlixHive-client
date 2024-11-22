@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -17,8 +17,6 @@ export const ProfileView = ({
   const [birthday, setBirthday] = useState(user.birthday);
   const navigate = useNavigate();
 
-  // console.log("User's FavoriteMovies:", user.favoriteMovies); // Array of favorite movie IDs
-
   const favoriteMoviesList =
     movies && user.favoriteMovies
       ? movies.filter((m) => user.favoriteMovies.includes(m.id))
@@ -33,32 +31,24 @@ export const ProfileView = ({
         }
       )
       .then((response) => {
-        console.log("Successfully removed from favorites:", response.data);
         onUserUpdate(response.data); // Update user data
       })
       .catch((error) => {
         console.log("Error removing movie from favorites", error);
       });
   };
+  
   const handleUpdate = (event) => {
     event.preventDefault();
     const updatedUser = { username, password, email, birthday };
 
-    fetch(
-      `https://flixhive-cf7fbbd939d2.herokuapp.com/users/${user.username}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedUser),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .put(`https://flixhive-cf7fbbd939d2.herokuapp.com/users/${user.username}`, updatedUser, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
         alert("Profile updated successfully!");
-        onUserUpdate(data); // Callback to update user info in parent component
+        onUserUpdate(response.data); // Callback to update user info in parent component
       })
       .catch((error) => {
         console.error("Error updating profile:", error);
@@ -71,21 +61,23 @@ export const ProfileView = ({
       "Are you sure you want to delete your account?"
     );
     if (confirmDeregister) {
-      fetch(`https://yourapi.com/users/${user.username}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      axios
+        .delete(`https://flixhive-cf7fbbd939d2.herokuapp.com/users/${user.username}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then(() => {
           alert("Account successfully deleted.");
           onUserDeregister(); // Callback to log out or handle user removal
           navigate("/login");
         })
         .catch((error) => {
-          console.error("Error deregistering account:", error);
+          console.error("Error deleting account:", error);
           alert("Something went wrong while deleting your account.");
         });
     }
   };
+
+ 
 
   return (
     <Container className= "profile-view"r>

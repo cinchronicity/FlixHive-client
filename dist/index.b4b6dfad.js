@@ -27639,7 +27639,11 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
+<<<<<<< Updated upstream
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bdclA","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3lzHY","../movie-view/movie-view.jsx":"ggaUx","../movie-card/movie-card.jsx":"bwuIu","../login-view/login-view.jsx":"9YtA0","../signup-view/signup-view.jsx":"4OGiN","../movie-card/movie-card.scss":"d6HH4","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../navigation-bar/navigation-bar.jsx":"bsPVM","../profile-view/profile-view.jsx":"2vVqf","react-router-dom":"9xmpe"}],"bdclA":[function(require,module,exports) {
+=======
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"bdclA","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"3lzHY","../movie-view/movie-view.jsx":"ggaUx","../movie-card/movie-card.jsx":"bwuIu","../login-view/login-view.jsx":"9YtA0","../signup-view/signup-view.jsx":"4OGiN","../movie-card/movie-card.scss":"d6HH4","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6"}],"bdclA":[function(require,module,exports) {
+>>>>>>> Stashed changes
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a

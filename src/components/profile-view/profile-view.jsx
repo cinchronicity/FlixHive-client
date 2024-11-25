@@ -8,13 +8,13 @@ export const ProfileView = ({
   user,
   token,
   movies,
-  onUserUpdate,
+  handleUserUpdate,
   onUserDeregister,
 }) => {
   const [username, setUsername] = useState(user.username);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(user.birthday);
+  const [birthdate, setBirthdate] = useState(user.birthdate);
   const navigate = useNavigate();
 
   const favoriteMoviesList =
@@ -31,16 +31,20 @@ export const ProfileView = ({
         }
       )
       .then((response) => {
-        onUserUpdate(response.data); // Update user data
+        handleUserUpdate(response.data); // Update user data
       })
       .catch((error) => {
-        console.log("Error removing movie from favorites", error);
+        console.error("Error removing movie from favorites", error);
       });
   };
   
   const handleUpdate = (event) => {
     event.preventDefault();
-    const updatedUser = { username, password, email, birthday };
+    const updatedUser = { username, email, birthdate };
+    if (password) {
+      updatedUser.password = password;
+    }
+      
 
     axios
       .put(`https://flixhive-cf7fbbd939d2.herokuapp.com/users/${user.username}`, updatedUser, {
@@ -80,7 +84,7 @@ export const ProfileView = ({
  
 
   return (
-    <Container className= "profile-view"r>
+    <Container className= "profile-view">
       
         <h2>Profile Information</h2>
         <Form onSubmit={handleUpdate}>
@@ -115,8 +119,8 @@ export const ProfileView = ({
             <Form.Label>Birthday</Form.Label>
             <Form.Control
               type="date"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
+              value={birthdate}
+              onChange={(e) => setBirthdate(e.target.value)}
             />
           </Form.Group>
           <Button className="mt-3" variant="primary" type="submit">

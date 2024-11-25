@@ -132,7 +132,7 @@ export const MainView = () => {
                   user={user}
                   movies={movies}
                   token={token}
-                  onUserUpdate={handleUserUpdate} // Make sure this function is passed
+                  handleUserUpdate={handleUserUpdate} // Make sure this function is passed
                   onUserDeregister={handleLogout}
                 />
               }

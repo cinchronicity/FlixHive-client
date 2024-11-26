@@ -9,6 +9,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../movie-card/movie-card.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import axios from "axios";
+
+
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -19,17 +22,25 @@ export const MainView = () => {
 
   useEffect(() => {
     if (!token) return;
-    fetch("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
+
+    axios.get("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((response) => response.json())
-      .then((movies) => {
-        const moviesFromApi = movies.map((doc) => ({
+      .then((response) => {
+        const moviesFromApi = response.data.map((doc) => ({
           id: doc._id,
           title: doc.title,
           description: doc.description,
-          genre: doc.genre,
-          director: doc.director,
+          genre: {
+            name: doc.genre.name,
+            description: doc.genre.description,
+          },
+          director: {
+            name: doc.director.name,
+            bio: doc.director.bio,
+            birthYear: doc.director.birthYear,
+            deathYear: doc.director.deathYear,
+          },
           imageURL: doc.imageURL,
           rating: doc.rating,
           featured: doc.featured,
@@ -37,7 +48,9 @@ export const MainView = () => {
         }));
         setMovies(moviesFromApi);
       })
-      .catch((error) => console.error("Error fetching movies:", error));
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+      });
   }, [token]);
 
   const handleLogout = () => {
@@ -56,7 +69,8 @@ export const MainView = () => {
     );
   };
   const handleUserUpdate = (updatedUser) => {
-    setUser(updatedUser); // Assuming setUser is updating the user state in the parent component
+    setUser(updatedUser); 
+    localStorage.setItem("user", JSON.stringify(updatedUser));
   };
 
   return (
@@ -137,7 +151,11 @@ export const MainView = () => {
                 />
               }
             />
-            <Route path="*" element={<Navigate to="/movies" />} />
+            <Route
+                path="/"
+                element={<Navigate to="/movies" />} 
+              />
+            <Route path="*" element={<Navigate to="/" />} />
           </>
         )}
       </Routes>

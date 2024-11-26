@@ -6,6 +6,8 @@ import { Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import PropTypes from "prop-types";
+
 
 export const MovieView = ({
   movies,
@@ -130,4 +132,34 @@ export const MovieView = ({
       </div>
     </Container>
   );
+};
+
+MovieView.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      genre: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      }).isRequired,
+      director: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        bio: PropTypes.string.isRequired,
+        birthYear: PropTypes.number,
+        deathYear: PropTypes.number,
+      }).isRequired,
+      imageURL: PropTypes.string.isRequired,
+      rating: PropTypes.number,
+      featured: PropTypes.bool,
+      actors: PropTypes.arrayOf(PropTypes.string),
+    })
+  ).isRequired,
+  getSimilarMovies: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired,
+  token: PropTypes.string.isRequired,
+  setUser: PropTypes.func.isRequired,
 };

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
+import PropTypes from "prop-types";
+
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [birthdate, setBirthdate] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,24 +18,29 @@ export const SignupView = () => {
       username: username,
       password: password,
       email: email,
-      birthday: birthday,
+      birthdate: birthdate,
     };
 
-    fetch("https://flixhive-cf7fbbd939d2.herokuapp.com/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.ok) {
-        alert("Signup successful");
-        window.location.reload();
-      } else {
+    axios
+      .post("https://flixhive-cf7fbbd939d2.herokuapp.com/users", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.status === 201) {
+          alert("Signup successful");
+          window.location.reload();
+        } else {
+          alert("Signup failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error during signup:", error.response.data);
         alert("Signup failed");
-      }
-    });
+      });
   };
+
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -65,12 +73,12 @@ export const SignupView = () => {
           placeholder="Enter email"
         />
       </Form.Group>
-      <Form.Group controlId="formBirthday">
+      <Form.Group controlId="formBirthdate">
         <Form.Label>Birthday</Form.Label>
         <Form.Control
           type="date"
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
+          value={birthdate}
+          onChange={(e) => setBirthdate(e.target.value)}
           required
         />
       </Form.Group>

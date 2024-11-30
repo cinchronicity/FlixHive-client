@@ -17,10 +17,7 @@ export const ProfileView = ({
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState(user.email);
   const [birthdate, setBirthdate] = useState(user.birthdate ? new Date(user.birthdate).toISOString().split('T')[0] : "");
-  const navigate = useNavigate();
-
-  console.log(user);
-  
+  const navigate = useNavigate();  
   
   const favoriteMoviesList =
     movies && user.favoriteMovies
@@ -182,7 +179,12 @@ ProfileView.propTypes = {
       imageURL: PropTypes.string.isRequired,
       rating: PropTypes.number,
       featured: PropTypes.bool,
-      actors: PropTypes.arrayOf(PropTypes.string),
+      actors: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          birthYear: PropTypes.number.isRequired,
+        })
+      ).isRequired,
     })
   ).isRequired,
   handleUserUpdate: PropTypes.func.isRequired,

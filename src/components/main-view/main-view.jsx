@@ -117,7 +117,6 @@ export const MainView = () => {
                       </Col>
                     ))}
                   </Row>
-                  <button onClick={handleLogout}>Logout</button>
                 </>
               }
             />

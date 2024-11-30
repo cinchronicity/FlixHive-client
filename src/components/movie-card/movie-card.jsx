@@ -7,14 +7,14 @@ import "./movie-card.scss";
 export const MovieCard = ({ movie }) => {
   return (
     <Card
-      className="h-100 movie-card-container"
+      className="h-100 movie-card"
     >
       <Card.Img variant="top" src={movie.imageURL} />
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.description}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-          <Button variant="link">Open</Button>
+          <Button variant="link">More Details</Button>
         </Link>
         
       </Card.Body>

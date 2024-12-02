@@ -1,12 +1,34 @@
-.movie-card-container {
-  border: 1px solid grey; 
-  overflow: hidden;
-}
 
 .movie-card {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+    .movie-card-description {
+      max-height: 200px; 
+    }
+  }
 }
 
-.movie-card:hover {
-  transform: scale(1.05);
+.movie-card-img {
+  width: 100%;
+  height: 100%; 
+ 
 }
+
+.movie-card-description {
+  max-height: 70px; // Initial max-height to hide overflow text
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: max-height 0.5s ease-in-out; 
+}
+
+.more-details-btn {
+  margin-top: 10px;
+  width: 100%;
+}
+

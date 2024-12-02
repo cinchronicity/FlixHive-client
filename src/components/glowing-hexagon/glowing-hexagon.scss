@@ -1,0 +1,252 @@
+// // .glow-hexagon-container {
+// //   position: absolute;
+// //   top: 0;
+// //   left: 0;
+// //   width: 100%;
+// //   height: 100%;
+// //   z-index: -1; // to make sure it's behind the content
+// //   overflow: hidden;
+// // }
+
+// // .hexagon-col {
+// //   display: flex;
+// //   justify-content: center;
+// //   align-items: center;
+// //   padding: 10px;
+// // }
+
+// // .hexagon {
+// //   width: 100%;
+// //   height: 0;
+// //   padding-bottom: 115.47%;
+// //   position: relative;
+// //   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+// //   background: linear-gradient(45deg, #000, #8a8a8a);
+// //   box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+// //   animation: glow 5s ease infinite;
+// // }
+
+// // .hexagon-inner {
+// //   position: absolute;
+// //   top: 2%;
+// //   right: 2%;
+// //   bottom: 2%;
+// //   left: 2%;
+// //   background: radial-gradient(
+// //     circle,
+// //     rgba(0, 0, 0, 1) 0%,
+// //     rgba(138, 138, 138, 1) 100%
+// //   );
+// //   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+// // }
+
+// // @keyframes glow {
+// //   0%, 100% {
+// //     box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+// //   }
+// //   50% {
+// //     box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+// //   }
+// // }
+
+
+// // .glow-hexagon-container {
+// //   position: absolute;
+// //   top: 0;
+// //   left: 0;
+// //   width: 100%;
+// //   height: 100%;
+// //   display: flex;
+// //   justify-content: center;
+// //   align-items: center;
+// //   z-index: -1; // Ensure it is behind other elements
+// // }
+
+// // .hexagon-col {
+// //   display: flex;
+// //   justify-content: center;
+// //   align-items: center;
+// // }
+
+// // .hexagon {
+// //   position: relative;
+// //   width: 100px; // Adjust the width to change the size
+// //   height: 57.74px; // Adjust the height to change the size
+// //   background-color: #1e90ff;
+// //   margin: 28.87px 0;
+// //   display: inline-block;
+// //   transition: all 0.3s ease-in-out;
+
+// //   &:before,
+// //   &:after {
+// //     content: "";
+// //     position: absolute;
+// //     width: 0;
+// //     border-left: 50px solid transparent; // Adjust the border size to change the size
+// //     border-right: 50px solid transparent; // Adjust the border size to change the size
+// //   }
+
+// //   &:before {
+// //     bottom: 100%;
+// //     border-bottom: 28.87px solid #1e90ff; // Adjust the border size to change the size
+// //   }
+
+// //   &:after {
+// //     top: 100%;
+// //     border-top: 28.87px solid #1e90ff; // Adjust the border size to change the size
+// //   }
+
+// //   &:hover {
+// //     background-color: #00bfff;
+// //     box-shadow: 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff;
+
+// //     &:before {
+// //       border-bottom-color: #00bfff;
+// //     }
+
+// //     &:after {
+// //       border-top-color: #00bfff;
+// //     }
+// //   }
+// // }
+
+
+
+
+// // .glow-hexagon-container {
+// //   position: fixed;
+// //   top: 0;
+// //   left: 0;
+// //   width: 100%;
+// //   height: 100%;
+// //   z-index: -1;
+// //   overflow: hidden;
+// //   background-color: #000;
+// // }
+
+// // .hexagon-grid {
+// //   display: grid;
+// //   grid-template-columns: repeat(10, 1fr);
+// //   grid-template-rows: repeat(5, 1fr);
+// //   grid-gap: 10px;
+// //   width: 100%;
+// //   height: 100%;
+// // }
+
+// // .hexagon {
+// //   width: 100%;
+// //   height: 0;
+// //   padding-bottom: 115.47%;
+// //   position: relative;
+// //   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+// //   background: linear-gradient(45deg, #000, #8a8a8a);
+// //   box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+// //   animation: glow 5s ease infinite;
+// // }
+
+// // .hexagon-inner {
+// //   position: absolute;
+// //   top: 2%;
+// //   right: 2%;
+// //   bottom: 2%; 
+// //   left: 2%;
+// //   background: radial-gradient(
+// //     circle,
+// //     rgba(0, 0, 0, 1) 0%,
+// //     rgba(138, 138, 138, 1) 100%
+// //   );
+// //   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+// // }
+
+// // @keyframes glow {
+// //   0%, 100% {
+// //     box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+// //   }
+// //   50% {
+// //     box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+// //   }
+// // }
+
+// .glow-hexagon-container {
+//   width: 100vw;
+//   height: 100vh;
+//   background-color: #000;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   overflow: hidden;
+// }
+.glow-hexagon-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  // background-color: #000000f0;
+  background-color: #161616;
+}
+
+.hexagon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+
+.hexagon {
+  width: 100%;
+  height: 0;
+  padding-bottom: 115.47%;
+  position: relative;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: radial-gradient(
+    circle at center,
+    #ffd700,
+    #8a8a8a
+  );
+  box-shadow: 0 0 40px 10px rgba(255, 215, 0, 0.8);
+  animation: glow 5s ease infinite;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+  }
+}
+
+.hexagon-inner {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  bottom: 2%; 
+  left: 2%;
+  background: radial-gradient(
+    circle,
+    #000000e6 0%,
+    #000000e8 100%
+  );
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 40px 10px rgba(255, 215, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 60px 15px rgba(255, 215, 0, 1);
+  }
+}
+
+
+

@@ -1,31 +1,90 @@
-.back-button {
-  padding: 4px 12px 4px 12px;
-  color: whitesmoke;
-  background-color: dodgerblue;
-  border: none;
-  border-radius: 4px;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-img {
-  max-width: 100%;
+// .back-button {
+//   padding: 4px 12px 4px 12px;
+//   color: whitesmoke;
+//   background-color: dodgerblue;
+//   border: none;
+//   border-radius: 4px;
+//   margin-top: 10px;
+//   margin-right: 10px;
+// }
+// img {
+//   max-width: 100%;
  
+// }
+
+// .back-button:hover {
+//   background-color: rgb(27, 120, 213);
+//   color: white;
+
+
+// }
+
+// .favorite-button {
+//   padding: 4px 12px 4px 12px;
+//   color: whitesmoke;
+//   background-color: dodgerblue;
+//   border: none;
+//   border-radius: 4px;
+//   margin-top: 10px;
+//   margin-right: 10px;
+//   margin-left: 10px;
+// }
+
+.movie-view-container {
+  background-color: #f8f9fa; // Optional: Set a background color
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-.back-button:hover {
-  background-color: rgb(27, 120, 213);
-  color: white;
-
-
+.movie-view-image {
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.favorite-button {
-  padding: 4px 12px 4px 12px;
-  color: whitesmoke;
-  background-color: dodgerblue;
-  border: none;
-  border-radius: 4px;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
+.movie-view-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.movie-view-description,
+.movie-view-genre,
+.movie-view-director,
+.movie-view-rating,
+.movie-view-featured,
+.movie-view-actors {
+  margin-bottom: 10px;
+}
+
+// .add-to-favorites-btn {
+//   margin-top: 20px;
+// }
+
+.back-button {
+  margin-top: 20px;
+  color: #007bff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.movie-view-container .add-to-favorites-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 24px;
+  padding: 10px;
+  background: none;
+  z-index: 1;
+}
+
+.add-to-favorites-btn .favorited {
+  color: red;
+}
+
+.add-to-favorites-btn .not-favorited {
+  color: gray;
 }

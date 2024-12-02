@@ -3,20 +3,23 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
-//add onAddToFavorites prop to MovieCard component later
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({
+  movie,
+}) => {
   return (
-    <Card
-      className="h-100 movie-card"
-    >
-      <Card.Img variant="top" src={movie.imageURL} />
+    <Card className="h-100 movie-card shadow-sm">
+ 
+      <Card.Img variant="top" src={movie.imageURL} className="movie-card-img" />
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.description}</Card.Text>
+        <Card.Text className="movie-card-description">
+          {movie.description}{" "}
+        </Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-          <Button variant="link">More Details</Button>
+          <Button variant="primary" className="more-details-btn">
+            More Details
+          </Button>
         </Link>
-        
       </Card.Body>
     </Card>
   );
@@ -42,4 +45,5 @@ MovieCard.propTypes = {
     featured: PropTypes.bool,
     actors: PropTypes.array,
   }).isRequired,
+
 };

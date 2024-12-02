@@ -3,6 +3,11 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import {GlowingHexagon} from '../glowing-hexagon/glowing-hexagon';
+import "./login-view.scss";
+import { Container } from "react-bootstrap";
+
+
 
 export const LoginView = ({ onLoggedIn }) => {
   //onLoggedIn is a prop that will be passed from the MainView component
@@ -40,8 +45,9 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    //callback onSubmit tells the form to call the function handleSubmit when the form is submitted
-    <Form onSubmit={handleSubmit}>
+    <Container className="login-view-container">
+     {/* <GlowingHexagon /> */}
+    <Form className="login-form bg-dark text-light p-4 rounded " onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -68,6 +74,7 @@ export const LoginView = ({ onLoggedIn }) => {
         Submit
       </Button>
     </Form>
+  </Container>
   );
 };
 

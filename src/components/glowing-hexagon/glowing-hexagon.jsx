@@ -26,7 +26,7 @@ export const GlowingHexagon = () => {
   return (
     <div className="glow-hexagon-container">
       <div className="hexagon-grid">
-        {[...Array(200)].map((_, i) => (
+        {[...Array(25)].map((_, i) => (
           <div key={i} className="hexagon">
             <div className="hexagon-inner"></div>
           </div>

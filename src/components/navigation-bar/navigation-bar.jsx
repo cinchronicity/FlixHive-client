@@ -1,11 +1,12 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import "./navigation-bar.scss";
 
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className= "navbar-custom navbar-dark"  expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           FlixHive
@@ -42,7 +43,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 Welcome, {user.username}!
               </Navbar.Text>
               <></>
-              <Nav.Link className="ms-3" onClick={onLoggedOut}>Logout</Nav.Link>
+              <Nav.Link className="ms-3 navbar-custom" onClick={onLoggedOut}>Logout</Nav.Link>
             </>
           )}
             

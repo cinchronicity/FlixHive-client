@@ -12,8 +12,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./main-view.scss";
 
-
-
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -24,9 +22,10 @@ export const MainView = () => {
   useEffect(() => {
     if (!token) return;
 
-    axios.get("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    axios
+      .get("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         const moviesFromApi = response.data.map((doc) => ({
           id: doc._id,
@@ -70,10 +69,9 @@ export const MainView = () => {
     );
   };
   const handleUserUpdate = (updatedUser) => {
-    setUser(updatedUser); 
+    setUser(updatedUser);
     localStorage.setItem("user", JSON.stringify(updatedUser));
   };
-
 
   return (
     <BrowserRouter>
@@ -116,9 +114,7 @@ export const MainView = () => {
                           md={4}
                           lg={3}
                         >
-                          <MovieCard movie={movie}
-        
-                           />
+                          <MovieCard movie={movie} />
                         </Col>
                       ))}
                     </Row>
@@ -137,7 +133,6 @@ export const MainView = () => {
                       user={user}
                       setUser={setUser}
                       token={token}
-        
                     />
                   )
                 }
@@ -154,10 +149,7 @@ export const MainView = () => {
                   />
                 }
               />
-              <Route
-                  path="/"
-                  element={<Navigate to="/movies" />}
-                />
+              <Route path="/" element={<Navigate to="/movies" />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           )}
@@ -166,4 +158,3 @@ export const MainView = () => {
     </BrowserRouter>
   );
 };
-

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { Form, Button, Row, Col, Container, Carousel } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
-
+import "../login-view/login-view.scss";
+import "./profile-view.scss";
 
 export const ProfileView = ({
   user,
@@ -16,15 +17,16 @@ export const ProfileView = ({
   const [username, setUsername] = useState(user.username);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState(user.email);
-  const [birthdate, setBirthdate] = useState(user.birthdate ? new Date(user.birthdate).toISOString().split('T')[0] : "");
-  const navigate = useNavigate();  
-  
+  const [birthdate, setBirthdate] = useState(
+    user.birthdate ? new Date(user.birthdate).toISOString().split("T")[0] : ""
+  );
+  const navigate = useNavigate();
+
   const favoriteMoviesList =
     movies && user.favoriteMovies
       ? movies.filter((m) => user.favoriteMovies.includes(m.id))
       : [];
 
-  
   const removeFromFavorites = (movieId) => {
     axios
       .delete(
@@ -34,7 +36,6 @@ export const ProfileView = ({
         }
       )
       .then((response) => {
-
         handleUserUpdate(response.data); // Update user data
       })
       .catch((error) => {
@@ -42,18 +43,21 @@ export const ProfileView = ({
       });
   };
 
-
   const handleUpdate = (event) => {
     event.preventDefault();
     const updatedUser = { username, email, birthdate };
     if (password) {
       updatedUser.password = password;
     }
-      
+
     axios
-      .put(`https://flixhive-cf7fbbd939d2.herokuapp.com/users/${username}`, updatedUser, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .put(
+        `https://flixhive-cf7fbbd939d2.herokuapp.com/users/${username}`,
+        updatedUser,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
         alert("Profile updated successfully!");
         handleUserUpdate(response.data); // Callback to update user info in parent component
@@ -70,9 +74,12 @@ export const ProfileView = ({
     );
     if (confirmDeregister) {
       axios
-        .delete(`https://flixhive-cf7fbbd939d2.herokuapp.com/users/${username}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
+        .delete(
+          `https://flixhive-cf7fbbd939d2.herokuapp.com/users/${username}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
         .then(() => {
           alert("Account successfully deleted.");
           onUserDeregister(); // Callback to log out or handle user removal
@@ -84,65 +91,81 @@ export const ProfileView = ({
         });
     }
   };
-
   return (
-    <Container className="profile-view">
-      <h2>Profile Information</h2>
-      <Form onSubmit={handleUpdate}>
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Leave blank to keep unchanged"
-          />
-        </Form.Group>
-        <Form.Group controlId="formEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="formBirthday">
-          <Form.Label>Birthday</Form.Label>
-          <Form.Control
-            type="date"
-            value={birthdate}
-            onChange={(e) => setBirthdate(e.target.value)}
-          />
-        </Form.Group>
-        <Button className="mt-3" variant="primary" type="submit">
-          Update Profile
-        </Button>
-      </Form>
-      <Button className="mt-3" variant="danger" onClick={handleDeregister}>
-        Deregister
-      </Button>
-      <h3 className="mt-5">Favorite Movies</h3>
-      <Row>
+    <Container className="profile-view-container">
+      <Row className="justify-content-center mx-auto">
+        <Col xs={12} md={8} lg={6}>
+          <Form className="profile-form" onSubmit={handleUpdate}>
+            <h2 className="text-center mb-4">Profile Information</h2>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="form-control-dark"
+              />
+            </Form.Group>
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="*current-password*"
+                className="form-control-dark"
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="form-control-dark"
+              />
+            </Form.Group>
+            <Form.Group controlId="formBirthday">
+              <Form.Label>Birthday</Form.Label>
+              <Form.Control
+                type="date"
+                value={birthdate}
+                onChange={(e) => setBirthdate(e.target.value)}
+                className="form-control-dark"
+              />
+            </Form.Group>
+            <Row>
+              <Col>
+                <Button variant="warning" type="submit" className=" mt-4">
+                  Update Profile
+                </Button>
+                <Col className="d-flex justify-content-end">
+                  <Button
+                    variant="outline-danger btn-sm"
+                    type="button"
+                    className=" mt-3 mr-3"
+                    onClick={handleDeregister}
+                  >
+                    Deregister
+                  </Button>
+                </Col>
+              </Col>
+            </Row>
+          </Form>
+        </Col>
+      </Row>
+      <h3 className="mt-3 mb-4">Favorite Movies</h3>
+      <Row className="mb-4">
         {favoriteMoviesList.length > 0 ? (
           favoriteMoviesList.map((movie) => (
-            <Col key={movie.id} xs={12} sm={6} md={4} lg={3}>
-              <MovieCard movie={movie} />
-              <Button
-                variant="danger"
-                onClick={() => removeFromFavorites(movie.id)}
-              >
-                Remove from Favorites
-              </Button>
+            <Col key={movie.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
+              <MovieCard
+                movie={movie}
+                showRemoveButton={true} // Show the "Remove from Favorites" button
+                onRemove={removeFromFavorites}
+              />
             </Col>
           ))
         ) : (
@@ -189,4 +212,6 @@ ProfileView.propTypes = {
   ).isRequired,
   handleUserUpdate: PropTypes.func.isRequired,
   onUserDeregister: PropTypes.func.isRequired,
+  showRemoveButton: PropTypes.bool,
+  onRemove: PropTypes.func,
 };

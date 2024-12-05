@@ -1,41 +1,11 @@
-// .back-button {
-//   padding: 4px 12px 4px 12px;
-//   color: whitesmoke;
-//   background-color: dodgerblue;
-//   border: none;
-//   border-radius: 4px;
-//   margin-top: 10px;
-//   margin-right: 10px;
-// }
-// img {
-//   max-width: 100%;
- 
-// }
-
-// .back-button:hover {
-//   background-color: rgb(27, 120, 213);
-//   color: white;
-
-
-// }
-
-// .favorite-button {
-//   padding: 4px 12px 4px 12px;
-//   color: whitesmoke;
-//   background-color: dodgerblue;
-//   border: none;
-//   border-radius: 4px;
-//   margin-top: 10px;
-//   margin-right: 10px;
-//   margin-left: 10px;
-// }
-
 .movie-view-container {
-  background-color: #f8f9fa; // Optional: Set a background color
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
+  background-color: #2d2d2d;
+  color: antiquewhite;
+  border: 1px solid #000000 !important;
 }
 
 .movie-view-image {
@@ -56,10 +26,6 @@
 .movie-view-actors {
   margin-bottom: 10px;
 }
-
-// .add-to-favorites-btn {
-//   margin-top: 20px;
-// }
 
 .back-button {
   margin-top: 20px;

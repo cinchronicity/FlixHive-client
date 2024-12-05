@@ -15,13 +15,9 @@ export const MovieView = ({
   token,
   setUser,
 }) => {
-
   const { movieId } = useParams(); // Use useParams to get movieId from URL
-  const movie = movies.find((m) => m.id === movieId); 
+  const movie = movies.find((m) => m.id === movieId);
   const similarMovies = getSimilarMovies(movieId); // Get similar movies based on movieId
-
-   
- 
 
   //POST request to add movie to users favorites
   const addToFavorites = (movieId) => {
@@ -96,7 +92,7 @@ export const MovieView = ({
             className="movie-view-image"
           />
         </Col>
-        <Col md={8}>
+        <Col className="movie-details" md={8}>
           <h1 className="movie-view-title">{movie.title}</h1>
           <p className="movie-view-description">
             <strong>Description: </strong>
@@ -124,11 +120,10 @@ export const MovieView = ({
               ))}
             </ul>
           </p>
-     
         </Col>
       </Row>
       <Link to={`/movies`}>
-        <Button className="back-button" variant="link">
+        <Button className="back-button" variant="dark">
           Back
         </Button>
       </Link>
@@ -184,5 +179,4 @@ MovieView.propTypes = {
   setUser: PropTypes.func.isRequired,
   addToFavorites: PropTypes.func.isRequired,
   removeFromFavorites: PropTypes.func.isRequired,
-
 };

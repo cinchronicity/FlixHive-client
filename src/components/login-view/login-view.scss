@@ -1,32 +1,30 @@
-
-.login-form {
+.login-form,
+.profile-form,
+.signup-form {
   position: relative;
   margin-top: 80px;
   z-index: 1; // Ensure the form is above the background
-  background: #2d2d2d; //change dep on background
+  background: #2d2d2d;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   color: antiquewhite;
 }
-.login-submit {
+.login-submit,
+.signup-submit {
   margin-top: 20px;
-  
 }
 
-
-//  }
-//TODO this has changed profile view to be centered!!!
 .form-control-dark {
   text-align: center;
   background-color: #2d2d2d !important;
-  color: antiquewhite !important; 
-  border: 1px solid white !important; 
+  color: antiquewhite !important;
+  border: 1px solid white !important;
   opacity: 0.8;
 }
 
 .form-control-dark::placeholder {
-  color: antiquewhite !important; 
-  
+  color: antiquewhite !important;
+  opacity: 0.4;
 }

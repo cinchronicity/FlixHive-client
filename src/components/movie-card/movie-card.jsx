@@ -1,22 +1,34 @@
 import PropTypes from "prop-types";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
-//add onAddToFavorites prop to MovieCard component later
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie, showRemoveButton, onRemove }) => {
   return (
-    <Card
-      className="h-100 movie-card-container"
-    >
-      <Card.Img variant="top" src={movie.imageURL} />
-      <Card.Body>
+    <Card className="h-100 movie-card">
+      <Card.Img variant="top" src={movie.imageURL} className="movie-card-img" />
+      <Card.Body className="movie-card-body">
         <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.description}</Card.Text>
+        <Card.Text className="movie-card-description">
+          {movie.description}{" "}
+        </Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-          <Button variant="link">Open</Button>
+          <Button variant="warning" className="more-details-btn">
+            Details
+          </Button>
         </Link>
-        
+        {showRemoveButton && (
+          <Col className="d-flex justify-content-center">
+            <Button
+              variant="outline-danger"
+              size="sm"
+              className=" remove-favorites-btn mt-2 "
+              onClick={() => onRemove(movie.id)}
+            >
+              Remove from Favorites
+            </Button>
+          </Col>
+        )}
       </Card.Body>
     </Card>
   );
@@ -42,4 +54,6 @@ MovieCard.propTypes = {
     featured: PropTypes.bool,
     actors: PropTypes.array,
   }).isRequired,
+  showRemoveButton: PropTypes.bool,
+  onRemove: PropTypes.func,
 };

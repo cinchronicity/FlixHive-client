@@ -3,6 +3,9 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+// import {GlowingHexagon} from '../glowing-hexagon/glowing-hexagon';
+import "./login-view.scss";
+import { Container, Row, Col } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
   //onLoggedIn is a prop that will be passed from the MainView component
@@ -29,7 +32,7 @@ export const LoginView = ({ onLoggedIn }) => {
         if (data.user) {
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
-          onLoggedIn(data.user, data.token); //onLoggedIn is a prop
+          onLoggedIn(data.user, data.token);
         } else {
           alert("No such user");
         }
@@ -40,37 +43,43 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    //callback onSubmit tells the form to call the function handleSubmit when the form is submitted
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          minLength="3"
-          placeholder="Enter username"
-        />
-      </Form.Group>
-
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          placeholder="Enter password"
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+    <Container className="login-view-container">
+      <Row>
+        <Col>
+          <Form className="login-form " onSubmit={handleSubmit}>
+            <h2 className="text-center">LOGIN</h2>
+            <Form.Group controlId="formUsername">
+              <Form.Label></Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                minLength="3"
+                placeholder="Enter username"
+                className="form-control-dark"
+              />
+            </Form.Group>
+            <Form.Group controlId="formPassword">
+              <Form.Label></Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Enter password"
+                className="form-control-dark"
+              />
+            </Form.Group>
+            <Button className="login-submit" variant="warning" type="submit">
+              Login
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
-
 
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,

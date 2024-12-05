@@ -2,3 +2,9 @@
 node_modules
 .cache
 .parcel-cache
+# Build output
+dist/
+
+# Other files to ignore
+.DS_Store
+.env

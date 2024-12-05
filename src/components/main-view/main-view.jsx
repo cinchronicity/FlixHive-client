@@ -10,8 +10,7 @@ import Col from "react-bootstrap/Col";
 import "../movie-card/movie-card.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
-
-
+import "./main-view.scss";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -23,9 +22,10 @@ export const MainView = () => {
   useEffect(() => {
     if (!token) return;
 
-    axios.get("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    axios
+      .get("https://flixhive-cf7fbbd939d2.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         const moviesFromApi = response.data.map((doc) => ({
           id: doc._id,
@@ -69,97 +69,92 @@ export const MainView = () => {
     );
   };
   const handleUserUpdate = (updatedUser) => {
-    setUser(updatedUser); 
+    setUser(updatedUser);
     localStorage.setItem("user", JSON.stringify(updatedUser));
   };
 
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
-      <Routes>
-        {!user ? (
-          <>
-            <Route
-              path="/login"
-              element={
-                <Row className="justify-content-md-center">
-                  <Col md={5}>
-                    <LoginView
-                      onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                      }}
-                    />
-                  </Col>
-                </Row>
-              }
-            />
-            <Route path="/signup" element={<SignupView />} />
-            <Route path="*" element={<Navigate to="/login" />} />
-          </>
-        ) : (
-          <>
-            <Route
-              path="/movies"
-              element={
-                <>
-                  <Row>
-                    {movies.map((movie) => (
-                      <Col
-                        className="mb-5"
-                        key={movie.id}
-                        xs={12}
-                        sm={6}
-                        md={4}
-                        lg={3}
-                      >
-                        <MovieCard movie={movie} />
-                      </Col>
-                    ))}
+      <div className="main-content">
+        <Routes>
+          {!user ? (
+            <>
+              <Route
+                path="/login"
+                element={
+                  <Row className="justify-content-md-center">
+                    <Col md={5}>
+                      <LoginView
+                        onLoggedIn={(user, token) => {
+                          setUser(user);
+                          setToken(token);
+                        }}
+                      />
+                    </Col>
                   </Row>
-                  <button onClick={handleLogout}>Logout</button>
-                </>
-              }
-            />
-
-            <Route
-              path="/movies/:movieId"
-              element={
-                movies.length === 0 ? (
-                  <div>Loading...</div>
-                ) : (
-                  <MovieView
-                    movies={movies} // pass movies array as prop
-                    getSimilarMovies={getSimilarMovies} // pass getSimilarMovies function as prop
-                    user={user} //TODO
-                    setUser={setUser} //TODO
-                    token={token} //TODO
-                  />
-                )
-              }
-            />
-
-            <Route
-              path="/profile"
-              element={
-                <ProfileView
-                  user={user}
-                  movies={movies}
-                  token={token}
-                  handleUserUpdate={handleUserUpdate} // Make sure this function is passed
-                  onUserDeregister={handleLogout}
-                />
-              }
-            />
-            <Route
-                path="/"
-                element={<Navigate to="/movies" />} 
+                }
               />
-            <Route path="*" element={<Navigate to="/" />} />
-          </>
-        )}
-      </Routes>
+              <Route path="/signup" element={<SignupView />} />
+              <Route path="*" element={<Navigate to="/login" />} />
+            </>
+          ) : (
+            <>
+              <Route
+                path="/movies"
+                element={
+                  <>
+                    <Row>
+                      {movies.map((movie) => (
+                        <Col
+                          className="mb-5"
+                          key={movie.id}
+                          xs={12}
+                          sm={6}
+                          md={4}
+                          lg={3}
+                        >
+                          <MovieCard movie={movie} />
+                        </Col>
+                      ))}
+                    </Row>
+                  </>
+                }
+              />
+              <Route
+                path="/movies/:movieId"
+                element={
+                  movies.length === 0 ? (
+                    <div>Loading...</div>
+                  ) : (
+                    <MovieView
+                      movies={movies} // pass movies array as prop
+                      getSimilarMovies={getSimilarMovies}
+                      user={user}
+                      setUser={setUser}
+                      token={token}
+                    />
+                  )
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProfileView
+                    user={user}
+                    movies={movies}
+                    token={token}
+                    handleUserUpdate={handleUserUpdate}
+                    onUserDeregister={handleLogout}
+                  />
+                }
+              />
+              <Route path="/" element={<Navigate to="/movies" />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </>
+          )}
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };
-//removie token={token} setUser={setUser} on profileView if not needed

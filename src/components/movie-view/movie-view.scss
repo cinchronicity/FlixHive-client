@@ -1,31 +1,56 @@
+.movie-view-container {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-color: #2d2d2d;
+  color: antiquewhite;
+  border: 1px solid #000000 !important;
+}
+
+.movie-view-image {
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.movie-view-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.movie-view-description,
+.movie-view-genre,
+.movie-view-director,
+.movie-view-rating,
+.movie-view-featured,
+.movie-view-actors {
+  margin-bottom: 10px;
+}
+
 .back-button {
-  padding: 4px 12px 4px 12px;
-  color: whitesmoke;
-  background-color: dodgerblue;
-  border: none;
-  border-radius: 4px;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-img {
-  max-width: 100%;
- 
+  margin-top: 20px;
+  color: #007bff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.back-button:hover {
-  background-color: rgb(27, 120, 213);
-  color: white;
-
-
+.movie-view-container .add-to-favorites-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 24px;
+  padding: 10px;
+  background: none;
+  z-index: 1;
 }
 
-.favorite-button {
-  padding: 4px 12px 4px 12px;
-  color: whitesmoke;
-  background-color: dodgerblue;
-  border: none;
-  border-radius: 4px;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
+.add-to-favorites-btn .favorited {
+  color: red;
+}
+
+.add-to-favorites-btn .not-favorited {
+  color: gray;
 }

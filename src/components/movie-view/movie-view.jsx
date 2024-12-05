@@ -1,13 +1,12 @@
 import "./movie-view.scss";
 import { MovieCard } from "../movie-card/movie-card";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom"; // Import useParams from react-router-dom
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import PropTypes from "prop-types";
-
 
 export const MovieView = ({
   movies,
@@ -66,70 +65,81 @@ export const MovieView = ({
   }
 
   return (
-    <Container>
-      <div className="movie-view">
-        <div className="movie-title">
-          <h1>{movie.title}</h1>
-        </div>
-        <div className="movie-description">
-          <p>
+    <Container className="movie-view-container">
+      <Button
+        className="add-to-favorites-btn"
+        variant="link"
+        onClick={() =>
+          user.favoriteMovies.includes(movie.id)
+            ? removeFromFavorites(movie.id)
+            : addToFavorites(movie.id)
+        }
+      >
+        <i
+          className={
+            user.favoriteMovies.includes(movie.id)
+              ? "bi bi-heart-fill favorited"
+              : "bi bi-heart not-favorited"
+          }
+        ></i>
+      </Button>
+      <Row>
+        <Col md={4}>
+          <Image
+            src={movie.imageURL}
+            alt={movie.title}
+            fluid
+            className="movie-view-image"
+          />
+        </Col>
+        <Col className="movie-details" md={8}>
+          <h1 className="movie-view-title">{movie.title}</h1>
+          <p className="movie-view-description">
             <strong>Description: </strong>
             {movie.description}
           </p>
-        </div>
-        <div className="movie-genre">
-          <p>
+          <p className="movie-view-genre">
             <strong>Genre:</strong> {movie.genre.name}
           </p>
-        </div>
-        <div className="movie-director">
-          <p>
+          <p className="movie-view-director">
             <strong>Director:</strong> {movie.director.name}
           </p>
-        </div>
-        <div className="movie-rating">
-          <p>
+          <p className="movie-view-rating">
             <strong>Rating:</strong> {movie.rating}
           </p>
-        </div>
-        <div className="featured">
-          <strong> Featured: </strong> {movie.featured ? "Yes" : "No"}
-        </div>
-        <div className="movie-image">
-          <img src={movie.imageURL} alt={movie.title} />
-        </div>
-        <Link to={`/movies`}>
-          <Button className= "back-button" variant="link">
-            Back
-          </Button>
-        </Link>
-        <Button className="favorite-button"
-          variant={
-            user.favoriteMovies.includes(movie.id) ? "danger" : "primary"
-          }
-          onClick={() =>
-            user.favoriteMovies.includes(movie.id)
-              ? removeFromFavorites(movie.id)
-              : addToFavorites(movie.id)
-          }
-        >
-          {user.favoriteMovies.includes(movie.id)
-            ? "Remove from Favorites"
-            : "Add to Favorites"}
+          <p className="movie-view-featured">
+            <strong>Featured: </strong> {movie.featured ? "Yes" : "No"}
+          </p>
+          <p className="movie-view-actors">
+            <strong>Actors:</strong>
+            <ul>
+              {movie.actors.map((actor) => (
+                <li key={actor.name}>
+                  {actor.name} (Born: {actor.birthYear})
+                </li>
+              ))}
+            </ul>
+          </p>
+        </Col>
+      </Row>
+      <Link to={`/movies`}>
+        <Button className="back-button" variant="dark">
+          Back
         </Button>
-        <h3>Similar Movies</h3>
-        {similarMovies.length > 0 ? (
-          <Row>
-            {similarMovies.map((similarMovie) => (
-              <Col key={similarMovie.id} xs={12} sm={6} md={4} lg={3}>
-                <MovieCard movie={similarMovie} />
-              </Col>
-            ))}
-          </Row>
-        ) : (
-          <p> No similar movies found.</p>
-        )}
-      </div>
+      </Link>
+
+      <h3>Similar Movies</h3>
+      {similarMovies.length > 0 ? (
+        <Row>
+          {similarMovies.map((similarMovie) => (
+            <Col key={similarMovie.id} xs={12} sm={6} md={4} lg={3}>
+              <MovieCard movie={similarMovie} />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <p> No similar movies found.</p>
+      )}
     </Container>
   );
 };
@@ -153,7 +163,12 @@ MovieView.propTypes = {
       imageURL: PropTypes.string.isRequired,
       rating: PropTypes.number,
       featured: PropTypes.bool,
-      actors: PropTypes.arrayOf(PropTypes.string),
+      actors: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          birthYear: PropTypes.number.isRequired,
+        })
+      ).isRequired,
     })
   ).isRequired,
   getSimilarMovies: PropTypes.func.isRequired,
@@ -162,4 +177,6 @@ MovieView.propTypes = {
   }).isRequired,
   token: PropTypes.string.isRequired,
   setUser: PropTypes.func.isRequired,
+  addToFavorites: PropTypes.func.isRequired,
+  removeFromFavorites: PropTypes.func.isRequired,
 };

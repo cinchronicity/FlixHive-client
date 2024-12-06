@@ -1,6 +1,7 @@
 .login-form,
 .profile-form,
-.signup-form {
+.signup-form
+ {
   position: relative;
   margin-top: 80px;
   z-index: 1; // Ensure the form is above the background
@@ -27,4 +28,15 @@
 .form-control-dark::placeholder {
   color: antiquewhite !important;
   opacity: 0.4;
+  
+}
+
+.form-label-dark {
+  color: antiquewhite !important;
+}
+
+.filter-form {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 }

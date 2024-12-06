@@ -28,7 +28,6 @@ export const LoginView = ({ onLoggedIn }) => {
     })
       .then((response) => response.json()) // JSON object will be used to extract the JWT token sent by API
       .then((data) => {
-        console.log("Login response: ", data);
         if (data.user) {
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("token", data.token);

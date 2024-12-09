@@ -28,15 +28,15 @@ export const SignupView = () => {
         },
       })
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 201) { 
           alert("Signup successful");
-          window.location.reload();
+          navigate("/login"); 
         } else {
           alert("Signup failed");
         }
       })
       .catch((error) => {
-        console.error("Error during signup:", error.response.data);
+        console.error("Error during signup:", error.response.data); 
         alert("Signup failed");
       });
   };

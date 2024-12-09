@@ -4,12 +4,14 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "../login-view/login-view.scss";
 import { Row, Col, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthdate, setBirthdate] = useState("");
+  const navigate = useNavigate(); 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,7 +32,7 @@ export const SignupView = () => {
       .then((response) => {
         if (response.status === 201) { 
           alert("Signup successful");
-          navigate("/login"); 
+          navigate("/login");  
         } else {
           alert("Signup failed");
         }

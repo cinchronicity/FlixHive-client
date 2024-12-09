@@ -5,12 +5,12 @@ import { LoginView } from "../login-view/login-view.jsx";
 import { SignupView } from "../signup-view/signup-view.jsx";
 import { NavigationBar } from "../navigation-bar/navigation-bar.jsx";
 import { ProfileView } from "../profile-view/profile-view.jsx";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col, Form, InputGroup } from "react-bootstrap";
 import "../movie-card/movie-card.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./main-view.scss";
+import "../login-view/login-view.scss";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -18,6 +18,7 @@ export const MainView = () => {
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     if (!token) return;
@@ -73,6 +74,13 @@ export const MainView = () => {
     localStorage.setItem("user", JSON.stringify(updatedUser));
   };
 
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
@@ -104,8 +112,26 @@ export const MainView = () => {
                 path="/movies"
                 element={
                   <>
+                    <Form className="filter-form mb-4">
+                      <Form.Group controlId="filter">
+                        <Form.Label className="form-label-dark"></Form.Label>
+                        <InputGroup>
+                          <InputGroup.Text>
+                            <i className="bi bi-search"></i>{" "}
+                          
+                          </InputGroup.Text>
+                          <Form.Control
+                            type="text"
+                            placeholder="Start typing to filter..."
+                            value={filter}
+                            onChange={handleFilterChange}
+                            className="form-control-dark"
+                          />
+                        </InputGroup>
+                      </Form.Group>
+                    </Form>
                     <Row>
-                      {movies.map((movie) => (
+                      {filteredMovies.map((movie) => (
                         <Col
                           className="mb-5"
                           key={movie.id}

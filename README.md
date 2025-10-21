@@ -1,5 +1,7 @@
 # FlixHive Client
 
+Check out the live demo hosted on Netlify: the-flixhive.netlify.app
+
 ## Project Description
 
 The **FlixHive Client** is a web application built using **React** that serves as the frontend for the FlixHive API. This application allows users to browse, search, and explore details about movies, directors, and genres, with additional functionalities for user account management and personalization.  Client is a key component of the MERN stack application, integrating seamlessly with a MongoDB database and an Express API for full CRUD functionality.

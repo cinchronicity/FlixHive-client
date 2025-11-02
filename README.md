@@ -1,6 +1,6 @@
 # FlixHive Client
 
-Check out the live demo hosted on Netlify: the-flixhive.netlify.app
+Check out the live demo hosted on Netlify: https://the-flixhive.netlify.app
 
 ## Project Description
 

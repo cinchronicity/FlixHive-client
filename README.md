@@ -96,7 +96,6 @@ This app can be hosted on platforms like Netlify, Vercel, or GitHub Pages.
 ### Important Dependencies
 
 - **React**: For building the UI.
-- **Redux**: For state management.
 - **Parcel**: For bundling and optimizing the codebase.
 - **SCSS**: For modular CSS.
 

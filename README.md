@@ -1,6 +1,7 @@
 # FlixHive Client
 
 Check out the live demo hosted on Netlify: https://the-flixhive.netlify.app
+Check out the backend API used for this app: https://github.com/cinchronicity/FlixHive
 
 ## Project Description
 
@@ -17,7 +18,7 @@ The **FlixHive Client** is a web application built using **React** that serves a
 ## Technologies Used
 
 - **React**: For building the user interface in a component-based structure.
-- **Redux**: For managing application state in a structured and predictable manner (e.g., filtering movies).
+- **React Hooks**: For managing application state in a structured and predictable manner (e.g., filtering movies).
 - **SCSS**: For styling the application with modular and reusable CSS.
 - **Parcel**: A build tool used to optimize and bundle the codebase for deployment.
 - **React Router**: For navigation and routing within the application.
